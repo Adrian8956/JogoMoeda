@@ -35,3 +35,48 @@ const criarMoedas = (num, moeda, textoAlt, classe) =>{
    dvMoedas.appendChild(br)
 }
 
+frm.addEventListener("submit", (e) =>{
+    e.preventDefault();
+
+    const soma = Number(frm.inSoma.value)
+    const moedas = dvMoedas.querySelectorAll("img");
+
+    let totalMoedas = 0;
+
+    // percorre as tags img (em moedas) e verifica propriedade className
+    for(const moeda of moedas){
+        if(moeda.className == "moeda1-00"){
+            totalMoedas += 1; // acumula 1 (para moedas de 1)
+        }else if(moeda.className == "moeda0-50"){
+            totalMoedas += 0.5; // acumula 0.50 (para moedas de 0.50)
+        }else if(moeda.className == "moeda0-25"){
+            totalMoedas += 0.25; // acumula 0.25 (para moedas de 0.25)
+        }else{
+            totalMoedas += 0.1; // acumula 0.10 (para moedas de 0.10)
+        }
+    }
+
+    const div = document.createElement("div");
+    const h3 = document.createElement("h3");
+    
+    let mensagem;
+    // verifica se o valor informado é igual ao total de Moedas exibido
+    if(soma == totalMoedas.toFixed(2)){
+        div.className = "alert alert-success";
+        mensagem = "Parabéns!! Você acertou!";
+    }else{
+        div.className = "alert alert-danger";
+        mensagem = `Ops... A resposta correta é ${totalMoedas.toFixed(2)}`;
+    }
+
+    const texto = document.createTextNode(mensagem);
+    h3.appendChild(texto); // texto é filho de h3;
+    div.appendChild(h3); // h3 é filho de div
+    dvMoedas.appendChild(div); // div é filha de divmoedas
+
+    frm.submit.disabled = true; // desabilita botão (resposta já foi exibida)
+})
+
+frm.addEventListener("reset", () =>{
+    window.location.reload();
+})

@@ -24,7 +24,7 @@ Não é necessário instalação. Basta baixar os arquivos do projeto e abrir o 
 ## Tecnologias Utilizadas
 
 - HTML
-- CSS (para estilos básicos)
+- Bootstrap (para estilos básicos)
 - JavaScript
 
 ## Contribuições
